@@ -41,7 +41,7 @@ public class Busqueda {
     }
 
     //Metodo de Validaciones
-    public static void aceptarArchivos(){
+    public void aceptarArchivos(){
         int validacion = 0;
         String aerolinea;
         Scanner in = new Scanner (System.in);
@@ -57,7 +57,6 @@ public class Busqueda {
             try{
                 File f = new File (file_aerolinea);
                 FileReader fr = new FileReader (f);
-                BufferedReader br = new BufferedReader (fr);
                 System.out.println("Se ha cargado la información. \n");
             } catch (Exception e){
                 System.out.println(e.getMessage()); // Manejar errores al abrir archivos
@@ -65,5 +64,8 @@ public class Busqueda {
             }
         } while (validacion >= 1); // Repetir hasta que se ingrese un archivo válido
     }
+
+    //Vuelo Directo
+
 
 }
