@@ -65,4 +65,5 @@ public class Busqueda {
             }
         } while (validacion >= 1); // Repetir hasta que se ingrese un archivo válido
     }
+
 }
