@@ -33,7 +33,7 @@ public class Busqueda {
     }
 
     //Método para encontrar un vuelo directo
-    public static void vueloDirecto(String carpeta, String ciudadSalida, String ciudadLlegada) {
+    public void vueloDirecto(String carpeta, String ciudadSalida, String ciudadLlegada) {
         File folder = new File(carpeta);
         File[] archivos = folder.listFiles();
 
@@ -49,15 +49,21 @@ public class Busqueda {
                     while ((line = br.readLine()) != null) { //Que no sea linea vacia
                         String[] partes = line.split(", "); //Convertir en un Array
 
-                        if (partes.length == 7) { //Cumpla con el formato
-                            double precio = Double.parseDouble(partes[0]); //Agarra el precio
-                            String salida = partes[1]; //Agarra la ciudad de salida
-                            String llegada = partes[2]; //Agarra la ciudad de llegada
+                        if (partes.length == 9) { // Cumpla con el formato (se agregó uno más para el código de vuelo)
+                            // Llama al método vueloValido para verificar si el vuelo es válido
+                            if (vueloValido(partes)) {
+                                double precio = Double.parseDouble(partes[0]); //Agarra el precio
+                                String salida = partes[1]; //Agarra la ciudad de salida
+                                String llegada = partes[2]; //Agarra la ciudad de llegada
 
-                            if (salida.equals(ciudadSalida) && llegada.equals(ciudadLlegada) && precio < precioMasBarato) { //Comparar con entrada usuario
-                                //Boxeador
-                                precioMasBarato = precio;
-                                aerolineaMasBarata = archivo.getName(); // Usar el nombre del archivo como el nombre de la aerolínea
+                                if (salida.equals(ciudadSalida) && llegada.equals(ciudadLlegada) && precio < precioMasBarato) {
+                                    //Boxeador
+                                    precioMasBarato = precio;
+                                    aerolineaMasBarata = archivo.getName(); // Usar el nombre del archivo como el nombre de la aerolínea
+                                }
+                            } else {
+                                // Si el vuelo no es válido, agrega el vuelo a la lista de ignorados
+                                annadirIgnorado(partes);
                             }
                         }
                     }
@@ -66,8 +72,10 @@ public class Busqueda {
                 }
             }
         }
+    }
 
-        //"Return"
+
+    //"Return"
         if (aerolineaMasBarata.isEmpty()) {
             System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
         } else {
@@ -85,7 +93,6 @@ public class Busqueda {
             return true;
         }
         else{
-            annadirIgnorado(vuelo);
             return false;
         }
     }
@@ -228,8 +235,8 @@ public class Busqueda {
         return false;
     }
 
-    public boolean annadirIgnorado(String[] vuelo) {
-
+    public void annadirIgnorado(String[] vuelo) {
+        this.ignorados += vuelo + "\n";
     }
 
 
