@@ -58,43 +58,7 @@ public class Busqueda {
 
     // 400, CDG, JFK, 10:00, 14:20, AF543, 150
     public static boolean vueloValido(String[] vuelo){
-        
-
-
-
+        return false;
     }
-<<<<<<< Updated upstream
-
-    //Metodo de Validaciones
-    public void aceptarArchivos(){
-        int validacion = 0;
-        String aerolinea;
-        Scanner in = new Scanner (System.in);
-        do{
-            System.out.println("Ingrese el nombre de una Aerolínea: ");
-            aerolinea = in.nextLine();
-        } while (aerolinea.length() == 0); // Asegurarse de que se ingrese un nombre de aerolínea válido
-
-        do{
-            validacion = 0;
-            System.out.println("Ingrese el nombre de archivo que contiene la información de los vuelos de " + aerolinea + ": ");
-            String file_aerolinea = in.nextLine();
-            try{
-                File f = new File (file_aerolinea);
-                FileReader fr = new FileReader (f);
-                System.out.println("Se ha cargado la información. \n");
-            } catch (Exception e){
-                System.out.println(e.getMessage()); // Manejar errores al abrir archivos
-                validacion = 1; // Marcador de error, volver a preguntar
-            }
-        } while (validacion >= 1); // Repetir hasta que se ingrese un archivo válido
-    }
-
-    //Vuelo Directo
-
-
-=======
->>>>>>> Stashed changes
 }
-
 
