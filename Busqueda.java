@@ -61,16 +61,6 @@ public class Busqueda {
                                     precioMasBarato = precio;
                                     aerolineaMasBarata = archivo.getName(); // Usar el nombre del archivo como el nombre de la aerolínea
                                 }
-                                //"Return"
-                                if (aerolineaMasBarata.isEmpty()) {
-                                    System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
-                                } else {
-                                    System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
-                                }
-                            }
-                            } else {
-                                // Si el vuelo no es válido, agrega el vuelo a la lista de ignorados
-                                annadirIgnorado(partes);
                             }
                         }
                     }
@@ -78,6 +68,13 @@ public class Busqueda {
                     System.out.println("Error al leer el archivo: " + e.getMessage());
                 }
             }
+        }
+
+        // Mover esta parte fuera del bucle
+        if (aerolineaMasBarata.isEmpty()) {
+            System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
+        } else {
+            System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
         }
     }
 
