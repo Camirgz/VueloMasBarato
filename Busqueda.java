@@ -16,7 +16,7 @@ public class Busqueda {
     private String fechaSalida;
     private String fechaLlegada;
     private String codigoVuelo;
-    private String asientos;
+    private int asientos;
 
 
     //Iniciar
@@ -199,13 +199,33 @@ public class Busqueda {
         return false;
     }
 
-
     public boolean codigoValidado(String[] vuelo) {
+        String codigoVuelo = vuelo[7];
 
+        // Verificar si el código de vuelo tiene el formato correcto (dos letras y cuatro dígitos)
+        if (codigoVuelo.matches("^[A-Z]{2}\\d{4}$")) {
+            this.codigoVuelo = codigoVuelo;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean asientosValidado(String[] vuelo) {
+        String asientosStr = vuelo[8];
 
+        try {
+            int asientos = Integer.parseInt(asientosStr);
+            if (asientos > 0) {
+                this.asientos = asientos;
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            // Manejo de errores si la conversión falla
+            return false;
+        }
+
+        return false;
     }
 
     public boolean annadirIgnorado(String[] vuelo) {
