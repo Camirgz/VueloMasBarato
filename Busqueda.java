@@ -76,14 +76,10 @@ public class Busqueda {
     }
 
     // 400, CDG, JFK, 10:00, 14:20, AF543, 150
-    public static boolean vueloValido(String[] vuelo){
+    public boolean vueloValido(String[] vuelo){
         if(precioValidado(vuelo) &&
-                ciudadSalidaValidado(vuelo) &&
-                ciudadLlegadaValidado(vuelo) &&
-                horaSalidaValidado(vuelo) &&
-                horaLlegadaValidado(vuelo) &&
-                fechaSalidaValidado(vuelo) &&
-                fechaLlegadaValidado(vuelo) &&
+                ciudadesValidas(vuelo) &&
+                validadorHorario(vuelo) &&
                 codigoValidado(vuelo) &&
                 asientosValidado(vuelo)){
             return true;
@@ -94,52 +90,125 @@ public class Busqueda {
         }
     }
 
-    public static boolean precioValidado(String[] vuelo){
+    //Validador de Precio
+    public boolean precioValidado(String[] vuelo) {
         String precioStr = vuelo[0];
         double precioDouble;
+
         try {
             precioDouble = Double.parseDouble(precioStr);
-            if (precioDouble > 0){
+            if (precioDouble > 0) {
+                //Mini Constructor
+                this.precio = precioDouble;
                 return true;
+            } else {
+                return false;
             }
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public static boolean ciudadSalidaValidado(String[] vuelo){
+    //Validador de Ciudades
+    public boolean ciudadesValidas(String[] vuelo) {
+        String ciudadSalida = vuelo[1];
+        String ciudadLlegada = vuelo[2];
+
+        // Verifica que ambas ciudades tengan 3 caracteres y sean diferentes
+        if (ciudadSalida.trim().length() == 3 && ciudadLlegada.trim().length() == 3) {
+            ciudadSalida = ciudadSalida.trim().toUpperCase();
+            ciudadLlegada = ciudadLlegada.trim().toUpperCase();
+            this.ciudadSalida = ciudadSalida;
+            this.ciudadLlegada = ciudadLlegada;
+            if (!ciudadSalida.equals(ciudadLlegada)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Validador de Horarios (Horas y Fechas)
+    public boolean validadorHorario(String[] vuelo) {
+        String horaSalida = vuelo[3];
+        String horaLlegada = vuelo[4];
+        String fechaSalida = vuelo[5];
+        String fechaLlegada = vuelo[6];
+
+        try {
+            // Verificar que las horas tengan el formato HH:MM y las fechas DD-MM-AAAA
+            if (horaSalida.matches("\\d{2}:\\d{2}") && horaLlegada.matches("\\d{2}:\\d{2}") &&
+                    fechaSalida.matches("\\d{2}-\\d{2}-\\d{2}") && fechaLlegada.matches("\\d{2}-\\d{2}-\\d{4}")) {
+
+                // Parser de las horas y fechas
+                String[] horaSalidaParts = horaSalida.split(":");
+                String[] horaLlegadaParts = horaLlegada.split(":");
+                String[] fechaSalidaParts = fechaSalida.split("-");
+                String[] fechaLlegadaParts = fechaLlegada.split("-");
+
+                //Dividir por partes ; HorasHH, MinutosMM
+                int horaSalidaHH = Integer.parseInt(horaSalidaParts[0]);
+                int horaLlegadaHH = Integer.parseInt(horaLlegadaParts[0]);
+                int horaSalidaMM = Integer.parseInt(horaSalidaParts[1]);
+                int horaLlegadaMM = Integer.parseInt(horaLlegadaParts[1]);
+
+                //Dividir por partes ; DiaDD, MesMM, AñoAA
+                int fechaSalidaDD = Integer.parseInt(fechaSalidaParts[0]);
+                int fechaLlegadaDD = Integer.parseInt(fechaLlegadaParts[0]);
+                int fechaSalidaMM = Integer.parseInt(fechaSalidaParts[1]);
+                int fechaLlegadaMM = Integer.parseInt(fechaLlegadaParts[1]);
+                int fechaSalidaAA = Integer.parseInt(fechaSalidaParts[2]);
+                int fechaLlegadaAA = Integer.parseInt(fechaLlegadaParts[2]);
+
+                boolean mismoDia;
+                boolean diaSgte;
+                boolean minsValidados;
+
+                //Diferentes Dias
+                if(fechaSalidaDD == fechaLlegadaDD && fechaSalidaMM == fechaLlegadaMM && fechaSalidaAA == fechaLlegadaAA){
+                    mismoDia = true;
+                }
+                else {
+                    mismoDia = false;
+                }
+
+                //Dia Siguiente
+                if(fechaSalidaDD == fechaLlegadaDD -1 && fechaSalidaMM == fechaLlegadaMM && fechaSalidaAA == fechaLlegadaAA){
+                    diaSgte = true;
+                }
+                else {
+                    diaSgte = false;
+                }
+
+                //Validacion final
+                if((mismoDia && horaSalidaHH < horaLlegadaHH) || (diaSgte && horaSalidaHH > horaLlegadaHH)){
+                    //Mini Constructor
+                    this.horaSalida = horaSalida;
+                    this.horaLlegada = horaLlegada;
+                    this.fechaSalida = fechaSalida;
+                    this.fechaLlegada = fechaLlegada;
+                    return true;
+                }
+                else{
+                    return false;
+                }
+
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return false;
+    }
+
+
+    public boolean codigoValidado(String[] vuelo) {
 
     }
 
-    public static boolean ciudadLlegadaValidado(String[] vuelo){
+    public boolean asientosValidado(String[] vuelo) {
 
     }
 
-    public static boolean horaSalidaValidado(String[] vuelo){
-
-    }
-
-    public static boolean horaLlegadaValidado(String[] vuelo){
-
-    }
-
-    public static boolean fechaSalidaValidado(String[] vuelo){
-
-    }
-
-    public static boolean fechaLlegadaValidado(String[] vuelo){
-
-    }
-
-    public static boolean codigoValidado(String[] vuelo){
-
-    }
-
-    public static boolean asientosValidado(String[] vuelo){
-
-    }
-
-    public static boolean annadirIgnorado(String[] vuelo){
+    public boolean annadirIgnorado(String[] vuelo) {
 
     }
 
