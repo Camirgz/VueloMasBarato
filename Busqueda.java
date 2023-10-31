@@ -70,13 +70,14 @@ public class Busqueda {
             }
         }
 
-        // Return
+        // Mover esta parte fuera del bucle
         if (aerolineaMasBarata.isEmpty()) {
             System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
         } else {
             System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
         }
     }
+
 
 
 
