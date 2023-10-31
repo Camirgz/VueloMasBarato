@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Busqueda {
+
+    public String ignorados = "";
+
+
     //Iniciar
     public static void Interaccion() {
         System.out.println("=== Bienvenid@ al sistema de búsqueda de vuelos baratos ===");
@@ -29,14 +33,18 @@ public class Busqueda {
 
         for (File archivo : archivos) { //Recorre todos los archivos de la Carpeta
             if (archivo.isFile()) { //Que no sea una Carpeta
+
                 try (BufferedReader br = new BufferedReader(new FileReader(archivo))) { //Leer archivo
                     String line; //Cada Linea
+
                     while ((line = br.readLine()) != null) { //Que no sea linea vacia
                         String[] partes = line.split(", "); //Convertir en un Array
+
                         if (partes.length == 7) { //Cumpla con el formato
                             double precio = Double.parseDouble(partes[0]); //Agarra el precio
                             String salida = partes[1]; //Agarra la ciudad de salida
                             String llegada = partes[2]; //Agarra la ciudad de llegada
+
                             if (salida.equals(ciudadSalida) && llegada.equals(ciudadLlegada) && precio < precioMasBarato) { //Comparar con entrada usuario
                                 //Boxeador
                                 precioMasBarato = precio;
@@ -60,11 +68,25 @@ public class Busqueda {
 
     // 400, CDG, JFK, 10:00, 14:20, AF543, 150
     public static boolean vueloValido(String[] vuelo){
-
+        if(precioValidado(vuelo) &&
+                ciudadSalidaValidado(vuelo) &&
+                ciudadLlegadaValidado(vuelo) &&
+                horaSalidaValidado(vuelo) &&
+                horaLlegadaValidado(vuelo) &&
+                fechaSalidaValidado(vuelo) &&
+                fechaLlegadaValidado(vuelo) &&
+                codigoValidado(vuelo) &&
+                asientosValidado(vuelo)){
+            return true;
+        }
+        else{
+            annadirIgnorado(vuelo);
+            return false;
+        }
     }
 
     public static boolean precioValidado(String[] vuelo){
-
+        
     }
 
     public static boolean ciudadSalidaValidado(String[] vuelo){
@@ -96,6 +118,10 @@ public class Busqueda {
     }
 
     public static boolean asientosValidado(String[] vuelo){
+
+    }
+
+    public static boolean annadirIgnorado(String[] vuelo){
 
     }
 
