@@ -81,7 +81,7 @@ public class Busqueda {
 
 
 
-    // 400, CDG, JFK, 10:00, 14:20, AF543, 150
+    // 400, CDG, JFK, 10:00, 14:20, 27-10-2023, 27-10-2023, AF5438, 150
     public boolean vueloValido(String[] vuelo){
         if(precioValidado(vuelo) &&
                 ciudadesValidas(vuelo) &&
