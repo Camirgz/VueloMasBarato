@@ -7,7 +7,16 @@ import java.util.Scanner;
 
 public class Busqueda {
 
-    public String ignorados = "";
+    private String ignorados;
+    private double precio;
+    private String ciudadSalida;
+    private String ciudadLlegada;
+    private String horaSalida;
+    private String horaLlegada;
+    private String fechaSalida;
+    private String fechaLlegada;
+    private String codigoVuelo;
+    private String asientos;
 
 
     //Iniciar
@@ -86,7 +95,16 @@ public class Busqueda {
     }
 
     public static boolean precioValidado(String[] vuelo){
-        
+        String precioStr = vuelo[0];
+        double precioDouble;
+        try {
+            precioDouble = Double.parseDouble(precioStr);
+            if (precioDouble > 0){
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static boolean ciudadSalidaValidado(String[] vuelo){
