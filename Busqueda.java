@@ -61,6 +61,13 @@ public class Busqueda {
                                     precioMasBarato = precio;
                                     aerolineaMasBarata = archivo.getName(); // Usar el nombre del archivo como el nombre de la aerolínea
                                 }
+                                //"Return"
+                                if (aerolineaMasBarata.isEmpty()) {
+                                    System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
+                                } else {
+                                    System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
+                                }
+                            }
                             } else {
                                 // Si el vuelo no es válido, agrega el vuelo a la lista de ignorados
                                 annadirIgnorado(partes);
@@ -75,13 +82,7 @@ public class Busqueda {
     }
 
 
-    //"Return"
-        if (aerolineaMasBarata.isEmpty()) {
-            System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
-        } else {
-            System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
-        }
-    }
+
 
     // 400, CDG, JFK, 10:00, 14:20, AF543, 150
     public boolean vueloValido(String[] vuelo){
