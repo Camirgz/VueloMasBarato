@@ -1,3 +1,4 @@
+//Import
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -49,6 +50,7 @@ public class Busqueda {
             }
         }
 
+        //"Return"
         if (aerolineaMasBarata.isEmpty()) {
             System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
         } else {
@@ -58,7 +60,45 @@ public class Busqueda {
 
     // 400, CDG, JFK, 10:00, 14:20, AF543, 150
     public static boolean vueloValido(String[] vuelo){
-        return false;
+
     }
+
+    public static boolean precioValidado(String[] vuelo){
+
+    }
+
+    public static boolean ciudadSalidaValidado(String[] vuelo){
+
+    }
+
+    public static boolean ciudadLlegadaValidado(String[] vuelo){
+
+    }
+
+    public static boolean horaSalidaValidado(String[] vuelo){
+
+    }
+
+    public static boolean horaLlegadaValidado(String[] vuelo){
+
+    }
+
+    public static boolean fechaSalidaValidado(String[] vuelo){
+
+    }
+
+    public static boolean fechaLlegadaValidado(String[] vuelo){
+
+    }
+
+    public static boolean codigoValidado(String[] vuelo){
+
+    }
+
+    public static boolean asientosValidado(String[] vuelo){
+
+    }
+
+
 }
 
