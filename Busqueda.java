@@ -70,7 +70,7 @@ public class Busqueda {
             }
         }
 
-        // Mover esta parte fuera del bucle
+        // Return
         if (aerolineaMasBarata.isEmpty()) {
             System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
         } else {
