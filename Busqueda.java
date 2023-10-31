@@ -1,44 +1,69 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
-//Métoodo para añadir aerolíneas
 public class Busqueda {
-    public static void Interaccion(){
+    //Iniciar
+    public static void Interaccion() {
         System.out.println("=== Bienvenid@ al sistema de búsqueda de vuelos baratos ===");
-        System.out.println("Primero se va a cargar la información.");
-        aceptarArchivos();
+        String carpeta;
+        do {
+            System.out.println("Ingrese la ruta de la carpeta que contiene los archivos de información de vuelos: ");
+            Scanner in = new Scanner(System.in);
+            carpeta = in.nextLine();
+        } while (carpeta.isEmpty());
 
-        int repeticion = insertarMasAerolineas();
-        while (repeticion != 0){
-            if (repeticion == -1){
-                repeticion = insertarMasAerolineas(); // Volver a preguntar si la entrada no es válida
-            }
 
-            else if (repeticion == 1){
-                aceptarArchivos(); // Añadir más aerolíneas
-                repeticion = insertarMasAerolineas();
+    }
+
+    //Método para encontrar un vuelo directo
+    public static void vueloDirecto(String carpeta, String ciudadSalida, String ciudadLlegada) {
+        File folder = new File(carpeta);
+        File[] archivos = folder.listFiles();
+
+        double precioMasBarato = Double.MAX_VALUE;
+        String aerolineaMasBarata = "";
+
+        for (File archivo : archivos) { //Recorre todos los archivos de la Carpeta
+            if (archivo.isFile()) { //Que no sea una Carpeta
+                try (BufferedReader br = new BufferedReader(new FileReader(archivo))) { //Leer archivo
+                    String line; //Cada Linea
+                    while ((line = br.readLine()) != null) { //Que no sea linea vacia
+                        String[] partes = line.split(", "); //Convertir en un Array
+                        if (partes.length == 7) { //Cumpla con el formato
+                            double precio = Double.parseDouble(partes[0]); //Agarra el precio
+                            String salida = partes[1]; //Agarra la ciudad de salida
+                            String llegada = partes[2]; //Agarra la ciudad de llegada
+                            if (salida.equals(ciudadSalida) && llegada.equals(ciudadLlegada) && precio < precioMasBarato) { //Comparar con entrada usuario
+                                //Boxeador
+                                precioMasBarato = precio;
+                                aerolineaMasBarata = archivo.getName(); // Usar el nombre del archivo como el nombre de la aerolínea
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error al leer el archivo: " + e.getMessage());
+                }
             }
+        }
+
+        if (aerolineaMasBarata.isEmpty()) {
+            System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
+        } else {
+            System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
         }
     }
 
-    public static int insertarMasAerolineas(){
-        Scanner in = new Scanner (System.in);
-        System.out.println("¿Desea ingresar otra aerolínea? (S/N): ");
-        String respuesta = in.nextLine();
-        if (respuesta.equalsIgnoreCase("S")){
-            return 1; // Agregar más aerolíneas
-        }
-        else if (respuesta.equalsIgnoreCase("N")){
-            return 0; // No agregar más aerolíneas, finalizar
-        }
-        else {
-            System.out.println("Por favor, ingrese S para ingresar más y N para no: ");
-            return -1; // Entrada no válida, volver a preguntar
-        }
+    // 400, CDG, JFK, 10:00, 14:20, AF543, 150
+    public static boolean vueloValido(String[] vuelo){
+        
+
+
+
     }
+<<<<<<< Updated upstream
 
     //Metodo de Validaciones
     public void aceptarArchivos(){
@@ -68,4 +93,8 @@ public class Busqueda {
     //Vuelo Directo
 
 
+=======
+>>>>>>> Stashed changes
 }
+
+
