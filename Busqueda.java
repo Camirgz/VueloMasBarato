@@ -7,79 +7,62 @@ import java.util.Scanner;
 
 public class Busqueda {
     private String ignorados;
-    private double precio;
-    private String ciudadSalida;
-    private String ciudadLlegada;
-    private String horaSalida;
-    private String horaLlegada;
-    private String fechaSalida;
-    private String fechaLlegada;
-    private String codigoVuelo;
-    private int asientos;
+    private Aerolinea[] aerolineas;
 
-    public static void Interaccion() {
-        System.out.println("=== Bienvenid@ al sistema de búsqueda de vuelos baratos ===");
-        // Crear un objeto JFileChooser para que el usuario seleccione una carpeta
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-        int returnValue = fileChooser.showOpenDialog(null);
-
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFolder = fileChooser.getSelectedFile();
-            String carpeta = selectedFolder.getAbsolutePath();
-
-            // Solicitar las ciudades de salida y llegada al usuario
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Ciudad de salida: ");
-            String ciudadSalida = scanner.nextLine().trim().toUpperCase();
-            System.out.print("Ciudad de llegada: ");
-            String ciudadLlegada = scanner.nextLine().trim().toUpperCase();
-
-            // Llamar al método vueloDirecto con la carpeta y ciudades proporcionadas
-            Busqueda busqueda = new Busqueda();
-            busqueda.vueloDirecto(carpeta, ciudadSalida, ciudadLlegada);
-        } else {
-            System.out.println("No se ha seleccionado una carpeta. El programa se cerrará.");
-        }
-    }
-
-    public void vueloDirecto(String carpeta, String ciudadSalida, String ciudadLlegada) {
+    public void cargarInformacion(String carpeta) {
         File folder = new File(carpeta);
         File[] archivos = folder.listFiles();
-
-        double precioMasBarato = Double.MAX_VALUE;
-        String aerolineaMasBarata = "";
-
-        for (File archivo : archivos) {
-            if (archivo.isFile()) {
-                try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-                    String line;
+        
+        this.aerolineas = new Aerolinea [50];
+        int cantidadLineas = 0;
+        
+        String line = "";
+        for (int i = 0; i<archivos.length; i++) {
+            if (archivos[i].isFile()) {
+                try (BufferedReader br = new BufferedReader(new FileReader(archivos[i]))) {
                     while ((line = br.readLine()) != null) {
                         String[] partes = line.split(", ");
                         if (partes.length == 9) {
                             if (vueloValido(partes)) {
-                                double precio = Double.parseDouble(partes[0]);
-                                String salida = partes[1];
-                                String llegada = partes[2];
-                                if (salida.equals(ciudadSalida) && llegada.equals(ciudadLlegada) && precio < precioMasBarato) {
-                                    precioMasBarato = precio;
-                                    aerolineaMasBarata = archivo.getName();
-                                }
+                                cantidadLineas++; 
                             } else {
                                 annadirIgnorado(partes);
                             }
                         }
                     }
+                    System.out.println("Se ha cargado la información");
                 } catch (IOException e) {
                     System.out.println("Error al leer el archivo: " + e.getMessage());
                 }
             }
+            
+            String [] datos = new String [cantidadLineas];
+            for (int j = 0; j<datos.length; j++){
+                datos [j] = line;
+            }
+            
+            aerolineas[i] = new Aerolinea (archivos[i].getName(), datos);
+            
+        }
+    }
+    
+    public void vueloDirecto (String ciudadSalida, String ciudadLlegada){
+        double precioMasBarato = Double.MAX_VALUE;
+        String aerolineaMasBarata = "";
+        
+        for (int i = 0; i<aerolineas.length; i++){
+            for (int j = 0; j<aerolineas[i].getVuelos().length; j++){
+                if (aerolineas[i].getVuelos()[j].getCiudadSalida().equals(ciudadSalida) && aerolineas[i].getVuelos()[j].getCiudadLlegada().equals(ciudadLlegada) && aerolineas[i].getVuelos()[j].getPrecio() < precioMasBarato) {
+                    precioMasBarato = aerolineas[i].getVuelos()[j].getPrecio();
+                    aerolineaMasBarata = aerolineas[i].getNombre();
+                }
+            }
         }
         if (aerolineaMasBarata.isEmpty()) {
-            System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta);
+            System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta.");
         } else {
-            System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta " + carpeta + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
+            System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
         }
     }
 
@@ -93,7 +76,6 @@ public class Busqueda {
         try {
             precioDouble = Double.parseDouble(precioStr);
             if (precioDouble > 0) {
-                this.precio = precioDouble;
                 return true;
             }
         } catch (NumberFormatException e) {
@@ -108,8 +90,6 @@ public class Busqueda {
         if (ciudadSalida.trim().length() == 3 && ciudadLlegada.trim().length() == 3) {
             ciudadSalida = ciudadSalida.trim().toUpperCase();
             ciudadLlegada = ciudadLlegada.trim().toUpperCase();
-            this.ciudadSalida = ciudadSalida;
-            this.ciudadLlegada = ciudadLlegada;
             if (!ciudadSalida.equals(ciudadLlegada)) {
                 return true;
             }
@@ -160,10 +140,6 @@ public class Busqueda {
                 }
 
                 if ((mismoDia && horaSalidaHH < horaLlegadaHH) || (diaSgte && horaSalidaHH > horaLlegadaHH)) {
-                    this.horaSalida = horaSalida;
-                    this.horaLlegada = horaLlegada;
-                    this.fechaSalida = fechaSalida;
-                    this.fechaLlegada = fechaLlegada;
                     return true;
                 } else {
                     return false;
@@ -178,7 +154,6 @@ public class Busqueda {
     public boolean codigoValidado(String[] vuelo) {
         String codigoVuelo = vuelo[7];
         if (codigoVuelo.matches("^[A-Z]{2}\\d{4}$")) {
-            this.codigoVuelo = codigoVuelo;
             return true;
         } else {
             return false;
@@ -190,7 +165,6 @@ public class Busqueda {
         try {
             int asientos = Integer.parseInt(asientosStr);
             if (asientos > 0) {
-                this.asientos = asientos;
                 return true;
             }
         } catch (NumberFormatException e) {
@@ -203,4 +177,7 @@ public class Busqueda {
         this.ignorados += String.join(", ", vuelo) + "\n";
     }
     
+    public String getIgnorados (){
+        return ignorados;
+    }
 }
