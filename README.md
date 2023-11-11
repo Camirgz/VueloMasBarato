@@ -47,3 +47,14 @@ Los vuelos que se consideran válidos deben cumplir con los siguientes criterios
 ## Resultados
 
 El programa te mostrará el vuelo más barato encontrado que cumpla con los criterios. Si no se encuentra ningún vuelo que cumpla con los criterios, te mostrará un mensaje de que no se encontraron vuelos disponibles. También se mostrarán los vuelos que no cumplieron con los criterios en caso de que los haya.
+
+## Miembros
+
+---
+
+- Camila Rodríguez Águila
+    - C36624
+- Liquin Yosery Zheng Li
+    - C38680
+- Jimena Bejarano Sánchez
+    - C31074
