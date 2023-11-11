@@ -8,8 +8,7 @@ import java.util.Scanner;
 public class Busqueda {
     private String ignorados;
     private Aerolinea[] aerolineas;
-
-
+    
     public void cargarInformacion(String carpeta) {
         File folder = new File(carpeta);
         File[] archivos = folder.listFiles();
@@ -31,7 +30,6 @@ public class Busqueda {
                             }
                         }
                     }
-                    System.out.println("Se ha cargado la información");
                 } catch (IOException e) {
                     System.out.println("Error al leer el archivo: " + e.getMessage());
                 }
@@ -52,10 +50,12 @@ public class Busqueda {
         String aerolineaMasBarata = "";
         
         for (int i = 0; i<aerolineas.length; i++){
-            for (int j = 0; j<aerolineas[i].getVuelos().length; j++){
-                if (aerolineas[i].getVuelos()[j].getCiudadSalida().equals(ciudadSalida) && aerolineas[i].getVuelos()[j].getCiudadLlegada().equals(ciudadLlegada) && aerolineas[i].getVuelos()[j].getPrecio() < precioMasBarato) {
-                    precioMasBarato = aerolineas[i].getVuelos()[j].getPrecio();
-                    aerolineaMasBarata = aerolineas[i].getNombre();
+            if (aerolineas[i]!=null){
+                for (int j = 0; j<aerolineas[i].getVuelos().length; j++){
+                    if (aerolineas[i].getVuelos()[j]!= null && aerolineas[i].getVuelos()[j].getCiudadSalida().equals(ciudadSalida) && aerolineas[i].getVuelos()[j].getCiudadLlegada().equals(ciudadLlegada) && aerolineas[i].getVuelos()[j].getPrecio() < precioMasBarato) {
+                        precioMasBarato = aerolineas[i].getVuelos()[j].getPrecio();
+                        aerolineaMasBarata = aerolineas[i].getNombre();
+                    }
                 }
             }
         }
