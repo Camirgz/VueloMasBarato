@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 public class Interaccion {
     public static void Interaccion() {
-        System.out.println("=== Bienvenid@ al sistema de búsqueda de vuelos baratos ===");
+        System.out.println("=== Bienvenid@ al sistema de búsqueda de vuelos baratos ===\n");
+        System.out.println("Seleccione una carpeta con los vuelos de cada aerolínea\n");
+        
         // Crear un objeto JFileChooser para que el usuario seleccione una carpeta
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -21,7 +23,7 @@ public class Interaccion {
             Busqueda busqueda = new Busqueda();
             
             busqueda.cargarInformacion(carpeta);
-            System.out.println("Se ignorarán los siguientes vuelos \n" + busqueda.getIgnorados());
+            System.out.println("Se ha cargado la información\n");
             
             System.out.println("==== Inicio de Búsqueda ====");
 
@@ -34,6 +36,8 @@ public class Interaccion {
 
             // Llamar al método vueloDirecto con la carpeta y ciudades proporcionadas
             busqueda.vueloDirecto(ciudadSalida, ciudadLlegada);
+            
+            System.out.println("Se ignorarán los siguientes vuelos:  \n" + busqueda.getIgnorados());
         } else {
             System.out.println("No se ha seleccionado una carpeta. El programa se cerrará.");
         }
