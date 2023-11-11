@@ -50,8 +50,6 @@ El programa te mostrará el vuelo más barato encontrado que cumpla con los crit
 
 ## Miembros
 
----
-
 - Camila Rodríguez Águila
     - C36624
 - Liquin Yosery Zheng Li
