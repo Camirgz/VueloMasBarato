@@ -2,14 +2,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import javax.swing.JFileChooser;
 import java.util.Scanner;
 
-public class Busqueda {
+public class Busqueda{
+    private Aerolinea [] aerolineas;
     private String ignorados;
-    private Aerolinea[] aerolineas;
     
-    public void cargarInformacion(String carpeta) {
+    public void CargarInformacion(String carpeta){
         File folder = new File(carpeta);
         File[] archivos = folder.listFiles();
         
@@ -41,31 +40,21 @@ public class Busqueda {
             }
             
             aerolineas[i] = new Aerolinea (archivos[i].getName(), datos);
-            
         }
     }
     
-    public void vueloDirecto (String ciudadSalida, String ciudadLlegada){
-        double precioMasBarato = Double.MAX_VALUE;
-        String aerolineaMasBarata = "";
+    public void VueloMasBaratoEscalasAerolineas(String ciudadSalida, String ciudadLlegada, String fechaSalida, int escalasMaximas){
         
-        for (int i = 0; i<aerolineas.length; i++){
-            if (aerolineas[i]!=null){
-                for (int j = 0; j<aerolineas[i].getVuelos().length; j++){
-                    if (aerolineas[i].getVuelos()[j]!= null && aerolineas[i].getVuelos()[j].getCiudadSalida().equals(ciudadSalida) && aerolineas[i].getVuelos()[j].getCiudadLlegada().equals(ciudadLlegada) && aerolineas[i].getVuelos()[j].getPrecio() < precioMasBarato) {
-                        precioMasBarato = aerolineas[i].getVuelos()[j].getPrecio();
-                        aerolineaMasBarata = aerolineas[i].getNombre();
-                    }
-                }
-            }
-        }
-        if (aerolineaMasBarata.isEmpty()) {
-            System.out.println("No se encontraron vuelos disponibles entre " + ciudadSalida + " y " + ciudadLlegada + " en la carpeta.");
-        } else {
-            System.out.println("El vuelo más barato entre " + ciudadSalida + " y " + ciudadLlegada + " es de la aerolínea " + aerolineaMasBarata + " por $" + precioMasBarato);
-        }
     }
-
+    
+    public void VueloMasBaratoEscalasSolo(String ciudadSalida, String ciudadLlegada, String fechaSalida, int escalasMaximas){
+        
+    }
+    
+    public void VueloMasBaratoDirecto(String ciudadSalida, String ciudadLlegada, String fechaSalida){
+    
+    }
+    
     public boolean vueloValido(String[] vuelo) {
         return precioValidado(vuelo) && ciudadesValidas(vuelo) && validadorHorario(vuelo) && codigoValidado(vuelo) && asientosValidado(vuelo);
     }
