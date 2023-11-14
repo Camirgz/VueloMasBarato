@@ -36,4 +36,8 @@ public class Vuelo{
     public double getPrecio (){
         return this.precio;
     }
+    
+    public String getFechaSalida(){
+        return this.fechaSalida;
+    }
 }
