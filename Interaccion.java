@@ -27,7 +27,7 @@ public class Interaccion{
                 
                 boolean busqueda = true;
                 
-                while (busqueda){
+                do{
                     System.out.println("==== Inicio de Búsqueda ====");
                     
                     Scanner in = new Scanner(System.in);
@@ -48,7 +48,7 @@ public class Interaccion{
                     String ciudadLlegada = "";
                     while (llegada){
                         System.out.print("Ciudad de llegada: ");
-                        ciudadSalida = in.nextLine().trim().toUpperCase();
+                        ciudadLlegada = in.nextLine().trim().toUpperCase();
                         llegada = false;
                         
                         if (ciudadLlegada.equals("")){
@@ -128,13 +128,13 @@ public class Interaccion{
                     String otra = in.nextLine();
                     
                     if (otra.equals("N")){
-                        break;
+                        busqueda = false;
                     }
                     
                     else if (otra.equals("S")){
                         busqueda = true;
                     }                    
-                }
+                } while(busqueda == true);
                 
                 System.out.println("Se ignorarán los siguientes vuelos:  \n" + correr.getIgnorados());
                 
