@@ -74,7 +74,7 @@ public class Interaccion{
                             }
                             
                             
-                            //verificar que sean numeros y que sean menores que los numeros logicos. meses menores que 12. no negativos.
+                            //verificar que sean numeros y que sean menores que los numeros logicos. meses menores que 12. no negativos. verificar que no sea espacio.
                             
                             
                             if (validaciones == 0){
