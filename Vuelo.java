@@ -21,6 +21,10 @@ public class Vuelo{
         this.asientos = asientos;
     }
     
+    public String imprimirVuelo (){
+        return "Codigo de vuelo: " + this.codigoVuelo + "\nPrecio: " + this.precio + "\nCiudad de salida: " + this.ciudadSalida + "\nFecha de salida: " + this.fechaSalida + "\nTiempo de salida: " + this.horaSalida + "\nCiudad de llegada: " + this.ciudadLlegada + "\nFecha de llegada: " + this.fechaLlegada + "\nTiempo de llegada: " + this.horaLlegada + "\nAsientos disponibles: " + this.asientos;
+    }
+    
     public String getCiudadSalida (){
         return this.ciudadSalida;
     }
