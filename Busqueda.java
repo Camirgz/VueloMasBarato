@@ -1,4 +1,4 @@
-import java.io.BufferedReader;
+        File folder = new File(carpeta);import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -52,7 +52,32 @@ public class Busqueda{
     }
     
     public void VueloMasBaratoDirecto(String ciudadSalida, String ciudadLlegada, String fechaSalida){
-    
+        String imprimir = "";
+        
+        for (int i = 0; i<aerolineas.length; i++){
+            if (aerolineas[i]!=null){
+                String barato_aerolinea = aerolineas[i].VueloDirecto(ciudadSalida, ciudadLlegada, fechaSalida);
+                if (barato_aerolinea != null){
+                    if (imprimir.equals("")){
+                        imprimir = imprimir + barato_aerolinea;
+                    }
+                    else{
+                        imprimir = imprimir + ";" + barato_aerolinea;
+                    }
+                }
+            }
+        }
+        
+        if (imprimir.equals("")){
+            System.out.println("No hay vuelos disponibles. Intente cambiar su lugar de partida, su destino, o la fecha.\n");
+        }
+        else{
+            String [] vuelos_imprimir = imprimir.split(";");
+            for (int i = 0; i<vuelos_imprimir.length; i++){
+                System.out.println(vuelos_imprimir[i]);
+            }
+        }
+        
     }
     
     public boolean vueloValido(String[] vuelo) {
@@ -94,12 +119,12 @@ public class Busqueda{
 
         try {
             if (horaSalida.matches("\\d{2}:\\d{2}") && horaLlegada.matches("\\d{2}:\\d{2}") &&
-                    fechaSalida.matches("\\d{2}-\\d{2}-\\d{2}") && fechaLlegada.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                    fechaSalida.matches("\\d{2}/\\d{2}/\\d{4}") && fechaLlegada.matches("\\d{2}/\\d{2}/\\d{4}")) {
 
                 String[] horaSalidaParts = horaSalida.split(":");
                 String[] horaLlegadaParts = horaLlegada.split(":");
-                String[] fechaSalidaParts = fechaSalida.split("-");
-                String[] fechaLlegadaParts = fechaLlegada.split("-");
+                String[] fechaSalidaParts = fechaSalida.split("/");
+                String[] fechaLlegadaParts = fechaLlegada.split("/");
 
                 int horaSalidaHH = Integer.parseInt(horaSalidaParts[0]);
                 int horaLlegadaHH = Integer.parseInt(horaLlegadaParts[0]);
