@@ -123,12 +123,12 @@ public class Busqueda{
 
         try {
             if (horaSalida.matches("\\d{2}:\\d{2}") && horaLlegada.matches("\\d{2}:\\d{2}") &&
-                    fechaSalida.matches("\\d{2}-\\d{2}-\\d{4}") && fechaLlegada.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                    fechaSalida.matches("\\d{2}/\\d{2}/\\d{4}") && fechaLlegada.matches("\\d{2}/\\d{2}/\\d{4}")) {
 
                 String[] horaSalidaParts = horaSalida.split(":");
                 String[] horaLlegadaParts = horaLlegada.split(":");
-                String[] fechaSalidaParts = fechaSalida.split("-");
-                String[] fechaLlegadaParts = fechaLlegada.split("-");
+                String[] fechaSalidaParts = fechaSalida.split("/");
+                String[] fechaLlegadaParts = fechaLlegada.split("/");
 
                 int horaSalidaHH = Integer.parseInt(horaSalidaParts[0]);
                 int horaLlegadaHH = Integer.parseInt(horaLlegadaParts[0]);
