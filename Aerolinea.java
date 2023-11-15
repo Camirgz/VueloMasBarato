@@ -43,6 +43,7 @@ public class Aerolinea{
     
     public void CargarMatriz(){
         matriz = new Vuelo [ciudadesOperando.length][ciudadesOperando.length][150];
+        int vuelos_inicializados = 0;
         
         for (int num_vuelo = 0; num_vuelo<vuelos.length; num_vuelo++){
             
@@ -52,17 +53,16 @@ public class Aerolinea{
                 if (partes [1].equals(ciudadesOperando[i])){
                         for (int j = 0; j<ciudadesOperando.length; j++){
                         if (partes [2].equals(ciudadesOperando[j])){
-                            for (int k = 0; k<150; k++){
-                                if (matriz[i][j][k]==null){
-                                    String precio_str = partes[0];
-                                    double precio = Double.parseDouble(precio_str);
-                                    
-                                    String asientos_str = partes[8];
-                                    int asientos = Integer.parseInt(asientos_str);
-                                    
-                                    matriz[i][j][k] = new Vuelo (precio, partes [1], partes[2], partes[3], partes[4], partes[5], partes[6], partes[7], asientos);
-                                }
-                            }
+                            
+                            String precio_str = partes[0];
+                            double precio = Double.parseDouble(precio_str);
+                            
+                            String asientos_str = partes[8];
+                            int asientos = Integer.parseInt(asientos_str);
+                            
+                            matriz[i][j][vuelos_inicializados] = new Vuelo (precio, partes [1], partes[2], partes[3], partes[4], partes[5], partes[6], partes[7], asientos);
+                            vuelos_inicializados++;
+                            
                         }
                     }  
                 }
