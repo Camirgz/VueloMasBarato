@@ -16,14 +16,21 @@ public class Busqueda{
         int cantidadLineas = 0;
         
         String line = "";
+        String entero = "";
         for (int i = 0; i<archivos.length; i++) {
             if (archivos[i].isFile()) {
                 try (BufferedReader br = new BufferedReader(new FileReader(archivos[i]))) {
                     while ((line = br.readLine()) != null) {
-                        String[] partes = line.split(", ");
+                        String[] partes = line.split(",");
                         if (partes.length == 9) {
                             if (vueloValido(partes)) {
-                                cantidadLineas++; 
+                                cantidadLineas++;
+                                if (entero.equals("")){
+                                    entero = entero + line;
+                                }
+                                else{
+                                    entero = entero + ";" + line;
+                                }
                             } else {
                                 annadirIgnorado(partes);
                             }
@@ -34,10 +41,7 @@ public class Busqueda{
                 }
             }
             
-            String [] datos = new String [cantidadLineas];
-            for (int j = 0; j<datos.length; j++){
-                datos [j] = line;
-            }
+            String [] datos = entero.split(";");
             
             aerolineas[i] = new Aerolinea (archivos[i].getName(), datos);
         }
@@ -119,12 +123,12 @@ public class Busqueda{
 
         try {
             if (horaSalida.matches("\\d{2}:\\d{2}") && horaLlegada.matches("\\d{2}:\\d{2}") &&
-                    fechaSalida.matches("\\d{2}/\\d{2}/\\d{4}") && fechaLlegada.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                    fechaSalida.matches("\\d{2}-\\d{2}-\\d{4}") && fechaLlegada.matches("\\d{2}-\\d{2}-\\d{4}")) {
 
                 String[] horaSalidaParts = horaSalida.split(":");
                 String[] horaLlegadaParts = horaLlegada.split(":");
-                String[] fechaSalidaParts = fechaSalida.split("/");
-                String[] fechaLlegadaParts = fechaLlegada.split("/");
+                String[] fechaSalidaParts = fechaSalida.split("-");
+                String[] fechaLlegadaParts = fechaLlegada.split("-");
 
                 int horaSalidaHH = Integer.parseInt(horaSalidaParts[0]);
                 int horaLlegadaHH = Integer.parseInt(horaLlegadaParts[0]);
@@ -167,7 +171,7 @@ public class Busqueda{
 
     public boolean codigoValidado(String[] vuelo) {
         String codigoVuelo = vuelo[7];
-        if (codigoVuelo.matches("^[A-Z]{2}\\d{4}$")) {
+        if (codigoVuelo.matches("^[A-Z]{2}\\d{3}$")) {
             return true;
         } else {
             return false;
