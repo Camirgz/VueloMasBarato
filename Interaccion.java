@@ -27,7 +27,7 @@ public class Interaccion{
                 
                 boolean busqueda = true;
                 
-                do{
+                while(busqueda==true){
                     System.out.println("==== Inicio de Búsqueda ====");
                     
                     Scanner in = new Scanner(System.in);
@@ -69,7 +69,7 @@ public class Interaccion{
                                 validaciones++;
                             }
                             
-                            if (fecha.charAt(2)!=('/') && fecha.charAt(5)!=('/')){
+                            if (fecha.charAt(2)!=('-') && fecha.charAt(5)!=('-')){
                                 validaciones++;
                             }
                             
@@ -134,7 +134,7 @@ public class Interaccion{
                     else if (otra.equals("S")){
                         busqueda = true;
                     }                    
-                } while(busqueda == true);
+                }
                 
                 System.out.println("Se ignorarán los siguientes vuelos:  \n" + correr.getIgnorados());
                 
