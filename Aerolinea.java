@@ -15,7 +15,7 @@ public class Aerolinea{
             ciudadesOperandoStr = agregarCiudad(ciudadesOperandoStr, partes[1]);
             ciudadesOperandoStr = agregarCiudad(ciudadesOperandoStr, partes[2]);
         }
-
+        
         // Convertir ciudadesOperandoStr a un array
         ciudadesOperando = ciudadesOperandoStr.split(",");
         
@@ -103,7 +103,7 @@ public class Aerolinea{
         }
     }
     
-    public void VueloEscalas(){
+    public void VueloEscalas(String ciudadSalida, String ciudadLlegada, String fechaSalida){
         
     }
 }
