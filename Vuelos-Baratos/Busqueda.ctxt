@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=Busqueda
+comment1.params=carpeta
+comment1.target=void\ CargarInformacion(java.lang.String)
+comment10.params=vuelo
+comment10.target=boolean\ asientosValidado(java.lang.String[])
+comment11.params=vuelo
+comment11.target=void\ annadirIgnorado(java.lang.String)
+comment12.params=
+comment12.target=java.lang.String\ getIgnorados()
+comment2.params=ciudadSalida\ ciudadLlegada\ fechaSalida\ escalasMaximas
+comment2.target=void\ VueloMasBaratoEscalasAerolineas(java.lang.String,\ java.lang.String,\ java.lang.String,\ int)
+comment3.params=ciudadSalida\ ciudadLlegada\ fechaSalida\ escalasMaximas
+comment3.target=void\ VueloMasBaratoEscalasSolo(java.lang.String,\ java.lang.String,\ java.lang.String,\ int)
+comment4.params=ciudadSalida\ ciudadLlegada\ fechaSalida
+comment4.target=void\ VueloMasBaratoDirecto(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment5.params=vuelo
+comment5.target=boolean\ vueloValido(java.lang.String[])
+comment6.params=vuelo
+comment6.target=boolean\ precioValidado(java.lang.String[])
+comment7.params=vuelo
+comment7.target=boolean\ ciudadesValidas(java.lang.String[])
+comment8.params=vuelo
+comment8.target=boolean\ validadorHorario(java.lang.String[])
+comment9.params=vuelo
+comment9.target=boolean\ codigoValidado(java.lang.String[])
+numComments=13

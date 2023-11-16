@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Aerolinea
+comment1.params=nombre\ datos
+comment1.target=Aerolinea(java.lang.String,\ java.lang.String[])
+comment2.params=ciudadesStr\ ciudad
+comment2.target=java.lang.String\ agregarCiudad(java.lang.String,\ java.lang.String)
+comment3.params=ciudadesStr\ ciudad
+comment3.target=boolean\ contieneCiudad(java.lang.String,\ java.lang.String)
+comment4.params=
+comment4.target=void\ CargarMatriz()
+comment5.params=ciudadSalida\ ciudadLlegada\ fechaSalida
+comment5.target=java.lang.String\ VueloDirecto(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment6.params=ciudadSalida\ ciudadLlegada\ fechaSalida
+comment6.target=void\ VueloEscalas(java.lang.String,\ java.lang.String,\ java.lang.String)
+numComments=7

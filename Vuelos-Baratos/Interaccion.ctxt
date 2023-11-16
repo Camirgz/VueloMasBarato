@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Interaccion
+comment1.params=
+comment1.target=void\ Interaccion()
+comment2.params=
+comment2.target=int\ cantidadEscalas()
+comment3.params=
+comment3.target=java.lang.String\ ciudadSalida()
+comment4.params=
+comment4.target=java.lang.String\ ciudadLlegada()
+comment5.params=
+comment5.target=java.lang.String\ fecha()
+comment6.params=
+comment6.target=char\ PreguntarSioNo()
+numComments=7
