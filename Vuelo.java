@@ -16,7 +16,9 @@ public class Vuelo{
         ciudadLlegada = ciudadLlegada.trim().toUpperCase();
         this.ciudadLlegada = ciudadLlegada;
         this.horaSalida = horaSalida;
+        this.horaLlegada = horaLlegada;
         this.fechaSalida = fechaSalida;
+        this.fechaLlegada = fechaLlegada;
         this.codigoVuelo = codigoVuelo;
         this.asientos = asientos;
     }
@@ -39,5 +41,25 @@ public class Vuelo{
     
     public String getFechaSalida(){
         return this.fechaSalida;
+    }
+    
+    public String getFechaLlegada(){
+        return this.fechaLlegada;
+    }
+    
+    public String getHoraSalida(){
+        return this.horaSalida;
+    }
+    
+    public String getHoraLlegada(){
+        return this.horaLlegada;
+    }
+    
+    public String getCodigoVuelo(){
+        return this.codigoVuelo;
+    }
+    
+    public int getAsientos(){
+        return this.asientos;
     }
 }
