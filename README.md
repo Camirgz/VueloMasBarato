@@ -51,6 +51,9 @@ El programa te mostrará el vuelo más barato encontrado que cumpla con los crit
 ## Limitaciones
 El programa sólo puede aceptar un total de 50 aerolíneas, cada una con un máximo de 150 vuelos.
 
+## Tecnicismos
+Para correr el programa, corra el main de la clase con el mismo nombre. Sin embargo, para que el programa funcione correctamente, debe de tener las siguientes clases en su dispositivo: Interaccion, Busqueda, Aerolinea, Vuelo.
+
 ## Miembros
 
 - Camila Rodríguez Águila
