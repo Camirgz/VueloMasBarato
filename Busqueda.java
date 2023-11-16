@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Busqueda{
     private Aerolinea [] aerolineas;
-    private String ignorados;
+    private String ignorados = "";
     
     public void CargarInformacion(String carpeta){
         File folder = new File(carpeta);
@@ -32,7 +32,7 @@ public class Busqueda{
                                     entero = entero + ";" + line;
                                 }
                             } else {
-                                annadirIgnorado(partes);
+                                annadirIgnorado(line);
                             }
                         }
                     }
@@ -48,11 +48,11 @@ public class Busqueda{
     }
     
     public void VueloMasBaratoEscalasAerolineas(String ciudadSalida, String ciudadLlegada, String fechaSalida, int escalasMaximas){
-        
+        System.out.println("Próximamente disponible");
     }
     
     public void VueloMasBaratoEscalasSolo(String ciudadSalida, String ciudadLlegada, String fechaSalida, int escalasMaximas){
-        
+        System.out.println("Próximamente disponible");
     }
     
     public void VueloMasBaratoDirecto(String ciudadSalida, String ciudadLlegada, String fechaSalida){
@@ -91,28 +91,38 @@ public class Busqueda{
     public boolean precioValidado(String[] vuelo) {
         String precioStr = vuelo[0];
         double precioDouble;
+        boolean devolver = true;
+        
         try {
             precioDouble = Double.parseDouble(precioStr);
-            if (precioDouble > 0) {
-                return true;
+            if (precioDouble >= 0) {
+                devolver = true;
             }
         } catch (NumberFormatException e) {
-            return false;
+            devolver =  false;
         }
-        return false;
+        return devolver;
     }
 
     public boolean ciudadesValidas(String[] vuelo) {
         String ciudadSalida = vuelo[1];
         String ciudadLlegada = vuelo[2];
+        
+        boolean devolver = true;
+        
         if (ciudadSalida.trim().length() == 3 && ciudadLlegada.trim().length() == 3) {
             ciudadSalida = ciudadSalida.trim().toUpperCase();
             ciudadLlegada = ciudadLlegada.trim().toUpperCase();
             if (!ciudadSalida.equals(ciudadLlegada)) {
-                return true;
+                devolver = true;
+            }else{
+                devolver = false;
             }
+        } else{
+            devolver = false;
         }
-        return false;
+        
+        return devolver;
     }
 
     public boolean validadorHorario(String[] vuelo) {
@@ -191,8 +201,8 @@ public class Busqueda{
         return false;
     }
 
-    public void annadirIgnorado(String[] vuelo) {
-        this.ignorados += String.join(", ", vuelo) + "\n";
+    public void annadirIgnorado(String vuelo) {
+        this.ignorados = this.ignorados + "\n" + vuelo + "\n";
     }
     
     public String getIgnorados (){
