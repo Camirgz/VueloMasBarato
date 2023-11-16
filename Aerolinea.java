@@ -99,7 +99,7 @@ public class Aerolinea{
             return null;
         }
         else{
-            return matriz[indice_ciudad_salida][indice_ciudad_llegada][indice_vuelo_mas_barato].imprimirVuelo();
+            return this.nombre.substring(0,this.nombre.length()-4) + "\n" + matriz[indice_ciudad_salida][indice_ciudad_llegada][indice_vuelo_mas_barato].imprimirVuelo();
         }
     }
     
