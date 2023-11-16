@@ -48,11 +48,14 @@ Los vuelos que se consideran válidos deben cumplir con los siguientes criterios
 
 El programa te mostrará el vuelo más barato encontrado que cumpla con los criterios. Si no se encuentra ningún vuelo que cumpla con los criterios, te mostrará un mensaje de que no se encontraron vuelos disponibles. También se mostrarán los vuelos que no cumplieron con los criterios en caso de que los haya.
 
+## Limitaciones
+El programa sólo puede aceptar un total de 50 aerolíneas, cada una con un máximo de 150 vuelos.
+
 ## Miembros
 
 - Camila Rodríguez Águila
     - C36624
-- Liquin Yosery Zheng Li
+- Liqing Yosery Zheng Lu
     - C38680
 - Jimena Bejarano Sánchez
     - C31074
